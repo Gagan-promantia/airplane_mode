@@ -1,0 +1,3 @@
+Flight <strong>{{ doc.name }}</strong> departs on {{ frappe.utils.format_date(doc.date_of_departure, "d MMMM, YYYY") }}.
+<br>
+Route: {{ doc.source_airport_code }} → {{ doc.destination_airport_code }}
