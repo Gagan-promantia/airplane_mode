@@ -1,0 +1,89 @@
+{% extends "templates/web.html" %}
+
+{% block page_content %}
+<div class="container my-5">
+    <!-- Breadcrumb -->
+    <nav aria-label="breadcrumb" class="mb-4">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item"><a href="/flights">Flights</a></li>
+            <li class="breadcrumb-item active">{{ doc.name }}</li>
+        </ol>
+    </nav>
+    
+    <!-- Flight Header -->
+    <div class="card mb-4">
+        <div class="card-header bg-primary text-white">
+            <h2 class="mb-0">
+                {{ doc.source_airport_code }} <i class="fa fa-arrow-right"></i> {{ doc.destination_airport_code }}
+            </h2>
+        </div>
+        <div class="card-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <h5 class="mb-3">Flight Information</h5>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th style="width: 200px;">Flight Number:</th>
+                                <td><strong>{{ doc.name }}</strong></td>
+                            </tr>
+                            <tr>
+                                <th>Airplane:</th>
+                                <td>{{ doc.airplane }}</td>
+                            </tr>
+                            <tr>
+                                <th>Status:</th>
+                                <td><span class="badge bg-info">{{ doc.status }}</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="col-md-6">
+                    <h5 class="mb-3">Journey Details</h5>
+                    <table class="table table-borderless">
+                        <tbody>
+                            <tr>
+                                <th style="width: 200px;">Source Airport:</th>
+                                <td>{{ doc.source_airport_code }}</td>
+                            </tr>
+                            <tr>
+                                <th>Destination Airport:</th>
+                                <td>{{ doc.destination_airport_code }}</td>
+                            </tr>
+                            <tr>
+                                <th>Date of Departure:</th>
+                                <td>{{ doc.date_of_departure }}</td>
+                            </tr>
+                            <tr>
+                                <th>Time of Departure:</th>
+                                <td>{{ doc.time_of_departure }}</td>
+                            </tr>
+                            <tr>
+                                <th>Duration:</th>
+                                <td>{{ doc.duration }} hours</td>
+                            </tr>
+                            {% set airplane_doc=frappe.get_doc("Airplane",doc.airplane)%}
+                            <tr>
+                                <th>Airline:</th>
+                                <td>{{airplane_doc.airline}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="mt-4 pt-3 border-top">
+                <a href="/book-flight-web-form/new?flight={{ doc.name }}" class="btn btn-success btn-lg me-2">
+                    <i class="fa fa-ticket"></i> Book Flight
+                </a>
+                <a href="/flights" class="btn btn-outline-secondary btn-lg">
+                    <i class="fa fa-arrow-left"></i> Back to Flights
+                </a>"
+            </div>
+        </div>
+    </div>
+</div>"
+{% endblock %}
